@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Blogs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .dp{
+            border-radius: 50px;
+            position: relative;
+            top: -40px;
+            left: 10px;
+        }
+        .blog{
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/home">Home</a>
+    </nav>
+    <div class="jumbotron">
+    <div class="row justify-content-center">
+    {{#each blogs as |b|}}
+        <div class="col-3 blog">
+            <div class="card border-dark">
+            <img src="{{b.coverimg}}" class="card-img-top" alt="coverimage">
+            <img src="{{b.dp}}" class="dp shadow" alt="profile img" width="75px">
+            <h5 class="card-subtitle text-muted mb-2 text-center"><b>Category:</b> {{b.category}}</h5>
+            <div class="card-body" id="{{b.title}}">
+            <div id="matter" class="text-center">
+                <a href="/blog?title={{b.title}}" class="btn btn-outline-dark btn-block"><h1 class="card-title">{{b.title}}</h1></a>
+            </div>
+            <div class="card-text text-center">
+            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>👍:</b> <span>{{b.likes}}</span>
+            </div>
+            <br>
+            <button class="edit btn">EDIT</button> &nbsp; <button class="del btn">DELETE</button>
+            </div>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="myblogs.js"></script>
+</body>
+</html>

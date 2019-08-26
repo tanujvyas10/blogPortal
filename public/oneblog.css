@@ -1,0 +1,61 @@
+#dp{
+    border: 1px solid black;
+    border-radius: 100px;
+    position: relative;
+    top: -100px;
+    left: 50px;
+    width: 200px;
+}
+#cover{
+    width: 100%;
+}
+#blog{
+    padding: 50px;
+    text-align: justify;
+    font-size: 2em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+#signature{
+    font-size: 3em;
+    text-align: center;
+}
+#back{
+    width: 75%;
+    margin: 50px auto;
+    background-color: white;
+    border: 5px solid black;
+    box-shadow: 10px 10px 40px 10px black;
+}
+#det{
+    font-size: 1.5em;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+#title{
+    font-size: 5em;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0 auto;
+}
+.ncomment{
+    background-color: rgb(46, 46, 148);
+    padding: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2.5em;
+    color: white;
+}
+ul{
+    list-style: none;
+}
+li{
+    width: max-content;
+    padding: 10px;
+    background-color: lightblue;
+    border-radius: 20px;
+    margin: 5px;
+}
+h3{
+    font-size: 2em;
+    margin: 10px;
+}

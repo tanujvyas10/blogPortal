@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="row">
+    <div id="sidebar" class="col-2">
+        <ul id="categories">
+            <li><a href="/category?cat=music">Music</a></li>
+            <li><a href="/category?cat=fashion">Fashion</a></li>
+            <li><a href="/category?cat=realEstate">Real Estate</a></li>
+            <li><a href="/category?cat=travel">Travel</a></li>
+            <li><a href="/category?cat=food">Food</a></li>
+            <li><a href="/category?cat=wedding">Wedding</a></li>
+            <li><a href="/category?cat=movie">Movie</a></li>
+            <li><a href="/category?cat=comics">Comics</a></li>
+            <li><a href="/category?cat=photography">Photography</a></li>
+            <li><a href="/category?cat=law">Law</a></li>
+            <li><a href="/category?cat=health">Health</a></li>
+            <li><a href="/category?cat=environment">Environment</a></li>
+            <li><a href="/category?cat=technology">Technology</a></li>
+            <li><a href="/category?cat=marketing">Marketing</a></li>
+            <li><a href="/category?cat=lifestyle">Lifestyle</a></li>
+            <li><a href="/category?cat=education">Education</a></li>
+            <li><a href="/category?cat=animals">Animals</a></li>
+            <li><a href="/category?cat=sports">Sports</a></li>
+            <li><a href="/category?cat=political">Political</a></li>
+        </ul>
+        <div id="ss">
+        <input type="text" class="form-control" id="search" name="q" placeholder="🔎 Search Blogs">
+        <div id="sugg"></div>
+        </div>
+        
+    </div>
+    <div id="right" class="col-10">
+    {{#if user}}
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/home">BlogPortal</a>
+    </nav>
+    <h1>Welcome {{user}}</h1> <img id="userimg" src="{{dp}}" alt="dp">
+    <a href="/signout">signOUT</a>
+    <br>
+    <a href="/createb">Create BLOG</a>
+    <a href="/myBlogs">My Blogs</a>
+    {{else}}
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/home">BlogPortal</a>
+    </nav>
+    {{!-- <a href="/signup">SignUP</a>
+    <a href="/signin">SignIN</a> --}}
+    <a href="/signin/facebook">SignIN with facebook</a>
+    <a href="/signin/google">signIN with google</a>
+    {{/if}}
+    <hr>
+    
+    <br>
+    <h1>TOP FEATURED BLOGS</h1>
+    <div class="row justify-content-center">
+    {{#each blogs as |b|}}
+        <div class="col-3 blog">
+            <div class="card border-dark">
+            <img src="{{b.coverimg}}" class="card-img-top" alt="coverimage">
+            <img src="{{b.dp}}" class="dp shadow" alt="profile img" width="75px">
+            <h5 class="card-subtitle text-muted mb-2 text-center"><b>Category:</b> {{b.category}}</h5>
+            <div class="card-body">
+            <div id="matter" class="text-center">
+                <a href="/blog?title={{b.title}}" class="btn btn-outline-dark btn-block"><h1 class="card-title">{{b.title}}</h1></a>
+            </div>
+            <div class="card-text text-center">
+            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>👍:</b> <span>{{b.likes}}</span>
+            </div>
+            {{!-- <div id="cmnts">
+                <h3>Comments:</h3>
+                <div id="{{b.title}}" class="comments"></div>
+            </div> --}}
+            </div>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+    <button class="btn btn-light btn-block" style="margin-bottom: 10px;"><a class="btn" href="/all">Show All</a></button>
+    </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="home.js"></script>
+    <link rel="stylesheet" href="home.css">
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All Blogs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        #ss{
+            width: max-content;
+            padding: 10px;
+            position: sticky;
+            top: 5px;
+            z-index: 1;
+            margin: 0 auto;
+            margin-bottom: 50px;
+        }
+        #sugg{
+            background-color: white;
+            position: sticky;
+            top: 55px;
+            z-index: 1;
+        }
+        #search{
+            box-shadow: 5px 5px 5px 2.5px black;
+        }
+        .dp{
+            border-radius: 50px;
+            position: relative;
+            top: -40px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="javascript:history.go(-1)">Back</a>
+    </nav>
+    <div class="jumbotron">
+        <div id="ss">
+        <input type="text" class="form-control-lg" id="search" name="q" placeholder="🔎 Search Blogs">
+        <div id="sugg"></div>
+        </div>
+    <div class="row">
+    {{#each blogs as |b|}}
+        <div class="col-3" style="margin-bottom: 50px;">
+            <div class="card border-dark" style="max-width: 350px; min-width: 50px;">
+            <img src="{{b.coverimg}}" class="card-img-top" alt="coverimage">
+            <img src="{{b.dp}}" class="dp shadow" alt="profile img" width="75px;">
+            <h5 class="card-subtitle text-muted mb-2 text-center"><b>Category:</b> {{b.category}}</h5>
+            <div class="card-body">
+            <div id="matter" class="text-center">
+                <a href="/blog?title={{b.title}}" class="btn btn-outline-dark btn-block"><h1 class="card-title">{{b.title}}</h1></a>
+            </div>
+            <div class="card-text text-center">
+            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>👍:</b> <span>{{b.likes}}</span>
+            </div>
+            {{!-- <div id="cmnts">
+                <h3>Comments:</h3>
+                <div id="{{b.title}}" class="comments"></div>
+            </div> --}}
+            </div>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+        <button id="previous" class="btn" style="font-size: 2em">Previous</button>
+        <button id="next" class="btn" style="font-size: 2em">Next</button>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="all.js"></script>
+</body>
+</html>

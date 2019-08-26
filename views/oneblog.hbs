@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="oneblog.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="javascript:history.go(-1)">Back</a>
+    </nav>
+    <div id="back">
+    {{#each bb.one as |b|}}
+    <img src="{{b.coverimg}}" id="cover" alt="coverimage">
+            
+            <img src="{{b.dp}}" id="dp" alt="profile img" width="50px">
+            
+            <h1 id="title">{{b.title}} <button id="like" style="cursor: pointer;">👍</button></h1>
+
+            {{!-- <p>{{b.body}}</p> --}}
+            <div id="blog">
+            {{#each ../bb.two}}
+                <p>{{this}}</p>
+            {{/each}}
+            </div>
+            
+            <div id="det">
+            <b>Author:</b> {{b.author}} &nbsp;&nbsp; <b>Date:</b> {{b.date}} &nbsp;&nbsp; <b>Likes:</b> <span>{{b.likes}}</span>
+            </div>
+            
+            <p id="signature">Liked it ? Don't forget to leave a like <a href="#like">♥</a></p>
+
+            <h3>Comments:</h3>
+            <ul id="{{b.title}}" class="comments"></ul>
+            
+            <div class="ncomment">
+                <form action="/addcomment" method="POST">
+                    <h2>Add comment</h2>
+                    <textarea name="title" style="display: none">{{b.title}}</textarea>
+                    <textarea name="author" style="display: none">{{b.author}}</textarea>
+                    <textarea name="dp" style="display: none">{{b.dp}}</textarea>
+                    <input name="comment" type="text" required>
+                    <button class="btn btn-light">Post</button>
+                </form>
+            </div>
+    {{/each}}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

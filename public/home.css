@@ -1,0 +1,61 @@
+.blog{
+    margin-bottom: 15px;
+}
+
+.card-title {
+    margin-bottom: 0;
+}
+
+#categories{
+    list-style: none;
+    padding: 10px;
+}
+
+#sidebar{
+    background-color: rgb(223, 223, 223);
+}
+
+#categories li:hover{
+    background-color: white;
+    padding: 5px;
+}
+
+#right{
+    box-shadow: -10px 0px 10px 1px #aaaaaa;
+}
+
+.dp{
+    border-radius: 50px;
+    position: relative;
+    top: -40px;
+    left: 10px;
+}
+
+#ss{
+    width: max-content;
+    padding: 10px;
+    position: sticky;
+    top: 5px;
+    z-index: 1;
+    margin: 0 auto;
+     margin-bottom: 50px;
+}
+
+#sugg{
+    background-color: white;
+    position: sticky;
+    top: 55px;
+    z-index: 1;
+}
+
+#search{
+    box-shadow: 5px 5px 5px 2.5px black;
+}
+
+#userimg{
+    border-radius: 100px;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 200px;
+}
