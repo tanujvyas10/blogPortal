@@ -4,6 +4,8 @@ const session=require('express-session')
 const passport=require('./stratergies')
 const { connectdb }=require('./db')
 
+const SERVER_PORT = process.env.PORT || 3000
+
 svr.set('view engine', 'hbs')
 svr.use('/', express.static(__dirname + '/public'))
 svr.use(express.urlencoded({extended: true}))
@@ -230,6 +232,6 @@ svr.get("/category", (req, res) => {
         .then(blogs => res.render('blogs', {blogs}))
 })
 
-svr.listen(3000, () => {
+svr.listen(SERVER_PORT, () => {
     console.log('http://localhost:3000/')
 })
