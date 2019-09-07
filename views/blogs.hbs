@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Category Blogs</title>
+    <title>Blogs</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         .dp{
@@ -22,22 +22,18 @@
     <div class="jumbotron">
     <div class="row justify-content-center">
     {{#each blogs as |b|}}
-        <div class="col-3 blog">
-            <div class="card border-dark">
+        <div class="col-xl-3 col-md-5 col-sm-10">
+            <div class="card border shadow" style="margin-bottom: 10px;">
             <img src="{{b.coverimg}}" class="card-img-top" alt="coverimage">
             <img src="{{b.dp}}" class="dp shadow" alt="profile img" width="75px">
             <h5 class="card-subtitle text-muted mb-2 text-center"><b>Category:</b> {{b.category}}</h5>
             <div class="card-body">
             <div id="matter" class="text-center">
-                <a href="/blog?title={{b.title}}" class="btn btn-outline-dark btn-block"><h1 class="card-title">{{b.title}}</h1></a>
+                <a href="/blog?title={{b.title}}" class="btn btn-dark"><h3 class="card-title">{{b.title}}</h3></a>
             </div>
             <div class="card-text text-center">
-            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>👍:</b> <span>{{b.likes}}</span>
+            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>Likes 👍:</b> <span>{{b.likes}}</span>
             </div>
-            {{!-- <div id="cmnts">
-                <h3>Comments:</h3>
-                <div id="{{b.title}}" class="comments"></div>
-            </div> --}}
             </div>
             </div>
         </div>

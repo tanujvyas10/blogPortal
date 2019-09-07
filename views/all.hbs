@@ -42,24 +42,20 @@
         <input type="text" class="form-control-lg" id="search" name="q" placeholder="🔎 Search Blogs">
         <div id="sugg"></div>
         </div>
-    <div class="row">
+    <div class="row justify-content-center">
     {{#each blogs as |b|}}
-        <div class="col-3" style="margin-bottom: 50px;">
-            <div class="card border-dark" style="max-width: 350px; min-width: 50px;">
+        <div class="col-xl-3 col-md-5 col-sm-10">
+            <div class="card border shadow" style="margin-bottom: 10px;">
             <img src="{{b.coverimg}}" class="card-img-top" alt="coverimage">
-            <img src="{{b.dp}}" class="dp shadow" alt="profile img" width="75px;">
+            <img src="{{b.dp}}" class="dp shadow" alt="profile img" width="75px">
             <h5 class="card-subtitle text-muted mb-2 text-center"><b>Category:</b> {{b.category}}</h5>
             <div class="card-body">
             <div id="matter" class="text-center">
-                <a href="/blog?title={{b.title}}" class="btn btn-outline-dark btn-block"><h1 class="card-title">{{b.title}}</h1></a>
+                <a href="/blog?title={{b.title}}" class="btn btn-dark"><h3 class="card-title">{{b.title}}</h3></a>
             </div>
             <div class="card-text text-center">
-            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>👍:</b> <span>{{b.likes}}</span>
+            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>Likes 👍:</b> <span>{{b.likes}}</span>
             </div>
-            {{!-- <div id="cmnts">
-                <h3>Comments:</h3>
-                <div id="{{b.title}}" class="comments"></div>
-            </div> --}}
             </div>
             </div>
         </div>

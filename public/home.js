@@ -1,23 +1,3 @@
-// let blogs=$('.comments')
-// let str=[]
-// for(let j=0;j<blogs.length;j++) {
-//     $.ajax({
-//         url: '/getcomments',
-//         type: 'get',
-//         success: (data) => {
-//             for(let i=0;i<data.length;i++) {
-//                 // alert(data[i].blogTitle)
-//                 if(data[i].blogTitle == blogs[j].id) {
-//                     str=str + `<li>${data[i].by}: ${data[i].comment} likes: ${data[i].likes} <button class="clike" id="${data[i].comment}">Like</button></li>`
-//                     // blogs[j].append(`${data[i].by}: ${data[i].comment} likes: ${data[i].likes} <br>`)
-//                 }
-//                 blogs[j].innerHTML=str
-//             }
-//             str=[]
-//         }
-//     })
-// }
-
 let blogs=$('.comments')
 let str=[]
 $.ajax({
@@ -26,8 +6,7 @@ $.ajax({
     success: (data) => {
         for(let i=0;i<data.length;i++) {
             if(data[i].blogTitle == blogs[0].id) {
-                str=str + `<li><b> ${data[i].by}:</b> ${data[i].comment}  <button class="clike btn btn-light" id="${data[i].comment}">${data[i].likes} Upvote</button></li>`
-                //<img src="${data[i].dp}" alt="dp" width="50px" style="border-radius: 30px;"> -----for dp in comment
+                str=str + `<li><b> ${data[i].by}:</b> ${data[i].comment}  <button class="clike btn-sm btn-light border" id="${data[i].comment}">${data[i].likes} Upvote</button></li>`
             }
             blogs[0].innerHTML=str
         }

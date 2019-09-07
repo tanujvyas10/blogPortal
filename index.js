@@ -2,7 +2,7 @@ const express=require('express')
 const svr=express()
 const session=require('express-session')
 const passport=require('./stratergies')
-const { connectdb, Users }=require('./db')
+const { connectdb }=require('./db')
 
 svr.set('view engine', 'hbs')
 svr.use('/', express.static(__dirname + '/public'))
@@ -23,7 +23,7 @@ function checkLogin(req, res, next) {
         return next()
     }
     else {
-        res.send('Error 403<br>Login First!!')
+        res.send('<h1>Error 403</h1><h3>Login First!!<h3>')
     }
 }
 
@@ -46,7 +46,6 @@ svr.get('/next/:skp', (req, res) => {
 })
 
 svr.get('/', (req, res) => {
-    // res.sendFile(__dirname + '/public/home.html')
     connectdb('blogportal')
         .then(db => db.collection('blogs').find().limit(8).sort({likes: -1}))
         .then(blogs => blogs.toArray())
@@ -55,7 +54,7 @@ svr.get('/', (req, res) => {
         })
 })
 
-svr.get('/home', (req, res) => {
+svr.get('/home', checkLogin, (req, res) => {
     let user=req.user[0].username
     let dp=req.user[0].dp
     connectdb('blogportal')
@@ -71,16 +70,19 @@ svr.get('/signup', (req, res) => {
 })
 
 svr.post('/signup', (req, res) => {
-    Users.create({
-        username: req.body.username,
-        fname: req.body.fname,
-        lname: req.body.lname,
+    let nuser = {
+        username: req.body.name,
         email: req.body.email,
-        dp: 'https://i.imgur.com/iDYfrOd.png',
-        password: req.body.password
-    })
-    .then(() => res.redirect('/home'))
-    .catch(() => res.redirect('/signup'))
+        password: req.body.password,
+        dp: (req.body.dp) ? req.body.dp : 'https://i.imgur.com/iDYfrOd.png'
+    }
+    connectdb('blogportal')
+        .then(db => db.collection('users').insertOne(nuser))
+        .then(() => res.redirect('/'))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.get('/signin', (req, res) => {
@@ -117,8 +119,6 @@ svr.get('/createb', checkLogin, (req, res) => {
 
 svr.post('/create', checkLogin, (req, res) => {
     let date=new Date()
-    // let content=req.body.body.split('--newpara--')
-    // console.log(content)
     let blog = {
         title: req.body.title,
         author: req.user[0].username,
@@ -146,13 +146,9 @@ svr.get('/myBlogs', checkLogin, (req, res) => {
     let name=req.user[0].username
     const myBlogs = () => connectdb('blogportal')
         .then(db => db.collection('blogs').find({ $and: [ {author: name}, {dp: dp} ]}).sort({likes: -1}))
-        // .then(db => db.collection('blogs').find({ author: name }))
         .then(blogs => blogs.toArray())
         .then((blogs) => res.render('myblogs', {blogs}))
     myBlogs()
-    // .then((blogs) => {
-    //     res.render('myblogs', {blogs, dp})
-    // })
 })
 
 svr.delete('/deleteBlog/:title', checkLogin, (req, res) => {
@@ -163,9 +159,6 @@ svr.delete('/deleteBlog/:title', checkLogin, (req, res) => {
 })
 
 svr.post('/editBlog', checkLogin, (req, res) => {
-    console.log(req.body.title);
-    console.log(req.body.body);
-    console.log(req.body.coverimg);
     connectdb('blogportal')
         .then(db => db.collection('blogs').updateOne({ title: req.body.title}, { $set: {body: req.body.body, coverimg: req.body.coverimg, category: req.body.category} }))
         .then(() => res.redirect('/myBlogs'))
@@ -176,8 +169,6 @@ svr.get('/blog', (req, res) => {
         .then(db => db.collection('blogs').find({ title: req.query.title }))
         .then(blog => blog.toArray())
         .then((blog) => {
-            // console.log(blog[0])
-            // console.log(typeof blog[0])
             let content=blog[0].body.split('--newpara--')
             let bb={
                 one: blog,
@@ -227,7 +218,6 @@ svr.get('/search', (req, res) => {
         .then(db => db.collection('blogs').find({ $text: { $search: req.query.q } } ))
         .then(titles => titles.toArray())
         .then(titles => {
-            // console.log(titles)
             res.send(titles)
         })
         .catch((e) => res.send(e))
@@ -240,8 +230,6 @@ svr.get("/category", (req, res) => {
         .then(blogs => res.render('blogs', {blogs}))
 })
 
-Users.sync().then(() => {
-    svr.listen(3000, () => {
-        console.log('http://localhost:3000/')
-    })
+svr.listen(3000, () => {
+    console.log('http://localhost:3000/')
 })

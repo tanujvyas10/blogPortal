@@ -25,17 +25,17 @@
     <div class="jumbotron">
     <div class="row justify-content-center">
     {{#each blogs as |b|}}
-        <div class="col-3 blog">
-            <div class="card border-dark">
+        <div class="col-xl-3 col-md-5 col-sm-10 blog">
+            <div class="card border shadow">
             <img src="{{b.coverimg}}" class="card-img-top" alt="coverimage">
             <img src="{{b.dp}}" class="dp shadow" alt="profile img" width="75px">
             <h5 class="card-subtitle text-muted mb-2 text-center"><b>Category:</b> {{b.category}}</h5>
-            <div class="card-body" id="{{b.title}}">
+            <div class="card-body">
             <div id="matter" class="text-center">
-                <a href="/blog?title={{b.title}}" class="btn btn-outline-dark btn-block"><h1 class="card-title">{{b.title}}</h1></a>
+                <a href="/blog?title={{b.title}}" class="btn btn-dark"><h3 class="card-title">{{b.title}}</h3></a>
             </div>
             <div class="card-text text-center">
-            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>👍:</b> <span>{{b.likes}}</span>
+            <b>Author:</b> {{b.author}} <br> <b>Created:</b> {{b.date}} <br> <b>Likes 👍:</b> <span>{{b.likes}}</span>
             </div>
             <br>
             <button class="edit btn">EDIT</button> &nbsp; <button class="del btn">DELETE</button>
@@ -45,6 +45,7 @@
     {{/each}}
     </div>
     </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="myblogs.js"></script>

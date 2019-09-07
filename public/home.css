@@ -2,6 +2,15 @@
     margin-bottom: 15px;
 }
 
+#logo{
+    padding: 20px;
+    width: max-content;
+    margin: 10px auto;
+    background-color: #17A2B8;
+    color: azure;
+    border-radius: 100px;
+}
+
 .card-title {
     margin-bottom: 0;
 }
@@ -12,7 +21,7 @@
 }
 
 #sidebar{
-    background-color: rgb(223, 223, 223);
+    background-color: rgb(164, 201, 216);
 }
 
 #categories li:hover{
@@ -21,7 +30,7 @@
 }
 
 #right{
-    box-shadow: -10px 0px 10px 1px #aaaaaa;
+    box-shadow: -10px 0px 10px 1px rgb(93, 156, 180);
 }
 
 .dp{
@@ -54,8 +63,5 @@
 
 #userimg{
     border-radius: 100px;
-    position: absolute;
-    top: 25px;
-    right: 25px;
     width: 200px;
 }
