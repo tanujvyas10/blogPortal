@@ -36,6 +36,10 @@ svr.get('/all', (req, res) => {
         .then((blogs) => {
             res.render('all', {blogs})
         })
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.get('/next/:skp', (req, res) => {
@@ -44,7 +48,10 @@ svr.get('/next/:skp', (req, res) => {
         .then(db => db.collection('blogs').find().skip(s).limit(12).sort({likes: -1}))
         .then(blogs => blogs.toArray())
         .then(blogs => res.send(blogs))
-        .catch(err => res.send(err))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.get('/', (req, res) => {
@@ -53,6 +60,10 @@ svr.get('/', (req, res) => {
         .then(blogs => blogs.toArray())
         .then((blogs) => {
             res.render('home', {blogs})
+        })
+        .catch(err => {
+            console.log(err)
+            res.send(err)
         })
 })
 
@@ -64,6 +75,10 @@ svr.get('/home', checkLogin, (req, res) => {
         .then(blogs => blogs.toArray())
         .then((blogs) => {
             res.render('home', {user, dp, blogs})
+        })
+        .catch(err => {
+            console.log(err)
+            res.send(err)
         })
 })
 
@@ -150,6 +165,10 @@ svr.get('/myBlogs', checkLogin, (req, res) => {
         .then(db => db.collection('blogs').find({ $and: [ {author: name}, {dp: dp} ]}).sort({likes: -1}))
         .then(blogs => blogs.toArray())
         .then((blogs) => res.render('myblogs', {blogs}))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
     myBlogs()
 })
 
@@ -164,6 +183,10 @@ svr.post('/editBlog', checkLogin, (req, res) => {
     connectdb('blogportal')
         .then(db => db.collection('blogs').updateOne({ title: req.body.title}, { $set: {body: req.body.body, coverimg: req.body.coverimg, category: req.body.category} }))
         .then(() => res.redirect('/myBlogs'))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.get('/blog', (req, res) => {
@@ -178,6 +201,10 @@ svr.get('/blog', (req, res) => {
             }
             res.render('oneblog', {bb}
         )})
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.get('/getcomments', (req, res) => {
@@ -185,6 +212,10 @@ svr.get('/getcomments', (req, res) => {
         .then(db => db.collection('comments').find())
         .then((comments => comments.toArray()))
         .then((comments => res.send(comments)))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.post('/addcomment', checkLogin, (req, res) => {
@@ -199,6 +230,10 @@ svr.post('/addcomment', checkLogin, (req, res) => {
     const newcomment = (comment) => connectdb('blogportal')
         .then(db => db.collection('comments').insertOne(comment))
         .then(() => res.redirect('back'))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
     newcomment(cmnt)
 })
 
@@ -206,12 +241,20 @@ svr.post('/like/:title', checkLogin, (req, res) => {
     connectdb('blogportal')
         .then(db => db.collection('comments').updateOne({ comment: req.params.title }, { $inc: {likes: 1} }))
         .then(() => res.redirect('/home'))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.post('/addlike/:title', checkLogin, (req, res) => {
     connectdb('blogportal')
         .then(db => db.collection('blogs').updateOne({ title: req.params.title}, { $inc: {likes: 1} }))
         .then(() => res.redirect('/home'))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.get('/search', (req, res) => {
@@ -230,6 +273,10 @@ svr.get("/category", (req, res) => {
         .then(db => db.collection('blogs').find({category: req.query.cat}))
         .then(blogs => blogs.toArray())
         .then(blogs => res.render('blogs', {blogs}))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 svr.listen(SERVER_PORT, () => {

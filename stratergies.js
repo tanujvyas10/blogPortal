@@ -44,14 +44,15 @@ passport.use( new FacebookStratergy({
                 }
                 connectdb('blogportal')
                     .then(db => db.collection('users').insertOne(fbuser))
-                    .then(fbuser => fbuser.toArray())
                     .then(fbuser => {
-                        console.log(fbuser)
-                        done(null, fbuser)
+                        console.log(fbuser.ops)
+                        done(null, fbuser.ops)
                     })
                     .catch(done)
             }
-            done(null, user)
+            else{
+                done(null, user)
+            }
         })
         .catch(done)
 }))
@@ -75,14 +76,15 @@ passport.use(new GoogleStrategy({
                 }
                 connectdb('blogportal')
                     .then(db => db.collection('users').insertOne(guser))
-                    .then(guser => guser.toArray())
                     .then(guser => {
-                        console.log(guser)
-                        return done(null, guser)
+                        console.log(guser.ops)
+                        return done(null, guser.ops)
                     })
                     .catch(done)
             }
-            done(null, user)
+            else{
+                done(null, user)
+            }
         })
         .catch(done)
   }
